@@ -1,36 +1,147 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+```md
+# Tax Advisor
 
-## Getting Started
+A simplified **tax advisor web application** built with **Next.js App Router**, **React**, **TypeScript**, **Zustand**, and **TanStack Query**, focusing on **clean state separation** and **real-world frontend architecture**.
 
-First, run the development server:
+---
+
+##  Tech Stack
+
+- **Next.js 14+ (App Router)**
+- **React**
+- **TypeScript (Strict Mode)**
+- **Zustand** – Global client-side state management
+- **TanStack Query (React Query v5)** – Server state management & caching
+- **Tailwind CSS** – Minimal styling
+- **Zod** – Runtime schema validation for user input and API responses
+
+
+---
+
+##  What This Project Demonstrates
+
+- **Clear separation of client state and server state**
+- Proper use of **Zustand** for user-entered data
+- Proper use of **TanStack Query** for API data and caching
+- Use of **derived state** instead of storing calculated values
+- Modern **Next.js App Router** architecture
+- Type-safe design using **TypeScript**
+
+---
+
+## 📌 Application Overview
+
+The application allows users to enter basic tax-related information such as:
+- **Annual gross income**
+- **Tax class**
+- **Marital status**
+- **Church tax applicability**
+- **Health insurance type**
+
+Based on these inputs and predefined tax rules fetched from an API, the app calculates:
+- **Estimated income tax**
+- **Solidarity surcharge**
+- **Church tax (if applicable)**
+- **Estimated net income**
+
+---
+
+## 🧠 Architecture & Data Flow
+
+The application follows a clean and scalable architecture:
+
+### **Zustand (Client State)**
+- Stores all **user-entered form data**
+- Used for global, client-side state
+- Does **not** store server data or calculated values
+
+### **TanStack Query (Server State)**
+- Fetches tax rules from a mock API
+- Caches server data efficiently
+- Handles loading and error states
+
+### **Derived State**
+- Tax calculations are computed using **pure utility functions**
+- No calculated values are stored in global state
+
+### **Next.js API Routes**
+- Provide a mock backend for tax rules
+- Simulate real-world server data fetching
+
+### **Zod (Runtime Validation)**
+- Validates API responses before they enter the app
+- Ensures user input is safe before calculations
+- Complements TypeScript with runtime guarantees
+
+
+---
+
+## 📂 Folder Structure
+
+```
+
+src/
+├─ app/
+│  ├─ api/
+│  │  └─ tax-rules/
+│  │     └─ route.ts
+│  ├─ layout.tsx
+│  ├─ page.tsx
+│  └─ providers.tsx
+│
+├─ lib/
+│  ├─ api/
+│  │  └─ taxRules.ts
+│  ├─ store/
+│  │  └─ taxStore.ts
+│  ├─ types/
+│  │  └─ tax.ts
+│  └─ utils/
+│     └─ calculateTax.ts
+
+````
+
+---
+
+##  Getting Started
+
+### Install dependencies
+```bash
+npm install
+````
+
+### Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚠️ Important Notes
 
-## Learn More
+* Tax calculations are **not legally accurate**
+* This project focuses on **frontend architecture and state management**
+* No authentication or database is implemented
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📚 Learning Focus
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project was built as a focused learning exercise to understand:
 
-## Deploy on Vercel
+* Modern **Next.js App Router** patterns
+* **Global state vs server state**
+* **Derived state** and pure functions
+* Scalable frontend application design
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+
+This project is for **educational purposes only**.
+
+```
+

@@ -1,13 +1,10 @@
-export type TaxRules = {
+import { taxRulesSchema, TaxRules } from "../validation/taxSchema";
 
-    incomeTaxRate: number;
-    solidarityRate: number;
-    churchTaxRate: number;
-}
 export async function fetchTaxRules() : Promise<TaxRules> {
     const res= await fetch('/api/tax-rules');
     if (!res.ok) {
         throw new Error('Failed to fetch tax rules');
     }
-    return res.json();
+    const data = await res.json();
+    return taxRulesSchema.parse(data);
 }

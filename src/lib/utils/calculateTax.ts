@@ -1,33 +1,17 @@
-import { TaxClass } from '../types/tax';
+import { TaxRules } from '../validation/taxSchema';
+import { userTaxInputSchema } from '../validation/taxSchema';
 
-type TaxRules = {
-  incomeTaxRate: number;
-  solidarityRate: number;
-  churchTaxRate: number;
-};
+export function calculateTax(input: unknown, rules: TaxRules) {
+  const validInput = userTaxInputSchema.parse(input);
 
-type CalculateTaxInput = {
-  grossIncome: number;
-  taxClass: TaxClass;
-  churchTax: boolean;
-};
-
-//These are dummy calculations for the tax rates.
-export function calculateTax(
-  input: CalculateTaxInput,
-  rules: TaxRules
-) {
-  const baseTax = input.grossIncome * rules.incomeTaxRate;
-
+  const baseTax = validInput.grossIncome * rules.incomeTaxRate;
   const solidarityTax = baseTax * rules.solidarityRate;
-
-  const churchTax = input.churchTax
+  const churchTax = validInput.churchTax
     ? baseTax * rules.churchTaxRate
     : 0;
 
   const totalTax = baseTax + solidarityTax + churchTax;
-
-  const netIncome = input.grossIncome - totalTax;
+  const netIncome = validInput.grossIncome - totalTax;
 
   return {
     baseTax,
